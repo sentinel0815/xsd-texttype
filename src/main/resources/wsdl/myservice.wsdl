@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:tns="http://myproject.org/applicationtypes"
+             name="myProject"
+             targetNamespace="http://myproject.org/applicationtypes"
+             xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="http://myproject.org/applicationtypes" schemaLocation="myservice.xsd"/>
+        </xsd:schema>
+    </types>
+
+    <message name="GetAdressesInput">
+        <part name="parameters" element="tns:GetAdressesRequest"/>
+    </message>
+
+    <message name="GetAdressesOutput">
+        <part name="parameters" element="tns:GetAdressesResponse"/>
+    </message>
+
+    <portType name="MyProject">
+        <operation name="GetAdresses">
+            <input message="tns:GetAdressesInput"/>
+            <output message="tns:GetAdressesOutput"/>
+        </operation>
+    </portType>
+
+    <binding name="MyProjectPortBinding" type="tns:MyProject">
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <operation name="GetAdresses">
+            <soap:operation soapAction="GetAdresses"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="myProject">
+        <port binding="tns:MyProjectPortBinding" name="myProjectPort">
+            <soap:address location="http://myserver:8081/service"/>
+        </port>
+    </service>
+</definitions>

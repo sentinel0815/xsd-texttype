@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxb:bindings xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               schemaLocation="../myservice.xsd"
+               version="3.0"
+               jaxb:extensionBindingPrefixes="xjc">
+
+    <!--
+        <jaxb:globalBindings>
+            <jaxb:javaType name="java.lange.String" xmlType="udt:TextType"/>
+        </jaxb:globalBindings>
+    -->
+
+    <!--
+        <jaxb:bindings node="//xs:complexType[@type='udt:TextType']">
+            <jaxb:property>
+                <jaxb:baseType name="java.lang.String"/>
+            </jaxb:property>
+        </jaxb:bindings>
+    -->
+
+    <!--
+        <jaxb:bindings node="//xs:complexType[@name='TextType']">
+            <jaxb:property>
+                <jaxb:baseType name="java.lang.String"/>
+            </jaxb:property>
+        </jaxb:bindings>
+    -->
+
+    <!-- xdomea-Baukasten.xsd defined 'TextType' which should be a simple String as stated in the xdomea documentation -->
+    <!-- Currently the use of TextType could be changed to xs:string in xsd file-->
+    <!-- The following is not working. Asked on Stackoverflow https://stackoverflow.com/questions/79042139/overriding-xsd-complex-type-with-simple-string-in-jaxb-bindings -->
+    <jaxb:bindings node="xs:complexType[@name='TextType']">
+        <jaxb:class name="java.lang.String"/>
+    </jaxb:bindings>
+</jaxb:bindings>
